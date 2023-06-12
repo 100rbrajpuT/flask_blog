@@ -1,11 +1,17 @@
 
 from datetime import datetime
-from itsdangerous import TimestampSigner as Serializer
+# from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+# from PyJWT import TimestampSigner as Serializer
+# from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+# from itsdangerous import Serializer
+from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
+# from PyJWT import TimedJSONWebSignatureSerializer as Serializer
 from flaskblog import db, login_manager ,  app
 from flask_login import UserMixin
-# # from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-# from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-# from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+# from itsdangerous import PyJWT as Serializer
+
+
+
 
 
 
@@ -25,7 +31,7 @@ class User(db.Model, UserMixin):
     
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(app.config['SECRET_KEY'], expires_sec)
-        return s.dumps({'user_id':'self.id'}).decode('utf-8')
+        return s.dumps({'user_id':self.id}).decode('utf-8')
     
     
     @staticmethod

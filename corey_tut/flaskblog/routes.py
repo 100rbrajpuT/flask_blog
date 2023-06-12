@@ -210,7 +210,7 @@ If you did not make this request then simply ignore this email and no changes wi
     mail.send(msg)
 
 
-@app.route('/reset_password',method=['GET', 'POST'])
+@app.route('/reset_password',methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('Home'))
@@ -223,7 +223,7 @@ def reset_request():
     return render_template('reset_request.html', title="Reset Password", form = form)
 
 
-@app.route('/reset_password/<token>',method=['GET', 'POST'])
+@app.route('/reset_password/<token>',methods=['GET','POST'])
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('Home'))
